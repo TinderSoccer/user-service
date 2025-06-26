@@ -5,10 +5,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import org.springframework.hateoas.RepresentationModel; // AÑADIR ESTA LÍNEA
+
+
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+// AÑADIR LA CLÁUSULA EXTENDS
+public class Usuario extends RepresentationModel<Usuario> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +21,13 @@ public class Usuario {
     private String nombre;
     private String correo;
     private String rol;
+
+    // AÑADIR CONSTRUCTOR CON PARÁMETROS PARA HACERLO MÁS FÁCIL
+    public Usuario(String nombre, String correo, String rol) {
+        this.nombre = nombre;
+        this.correo = correo;
+        this.rol = rol;
+    }
 
     public Usuario() {
     }
